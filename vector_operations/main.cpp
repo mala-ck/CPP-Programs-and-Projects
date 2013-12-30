@@ -2,17 +2,7 @@
 #include "Vector3D.h"
 using namespace std;
 
-/* Create a 3-dimensional Vector class in C++.
- * The class should be able to calculate vector addition, subtraction, Euclidean norm, and an inner product.
- * Additional functionality is encouraged!
- * You don't have to start from scratch, but the result should be largely your creation.
- * We've attached a sample driver program as a starting point for the api,
- * please feel free to modify the driver program as needed...
- * it's only a starting point. Send the class and driver program source,
- * along with any special compilation instructions -
- * we will be compiling and running it, in addition to looking over your code.
- * (Preferably no external library dependencies, besides the c++ standard library.)
- */
+/* Program to perform different kinds of 3D vector operations */
 
 
 int main()
