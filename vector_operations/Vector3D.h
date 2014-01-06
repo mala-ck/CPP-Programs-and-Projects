@@ -11,6 +11,8 @@ using namespace std;
  * The class calculates vector addition, subtraction, Euclidean norm, and an inner product.
  */
 
+#define FLOAT_MIN 0.00001
+
 template <class T>
 class VECTOR_3D
 {
@@ -102,20 +104,20 @@ VECTOR_3D<T>& VECTOR_3D<T>::operator =(VECTOR_3D<T> const &v)
 template <class T>
 VECTOR_3D<T> VECTOR_3D<T>::operator -() const
 {
-    VECTOR_3D<T> tmp;
+    VECTOR_3D<T> result(0,0,0);
 
-    tmp.x = -x;
-    tmp.y = -y;
-    tmp.z = -z;
+    result.x = -x;
+    result.y = -y;
+    result.z = -z;
 
-    return tmp;
+    return result;
 }
 
 // Vector addition
 template <class T>
 VECTOR_3D<T> VECTOR_3D<T>::operator +(VECTOR_3D<T> const &v)
 {
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
     result.x = x + v.x;
     result.y = y + v.y;
@@ -139,7 +141,7 @@ VECTOR_3D<T>& VECTOR_3D<T>::operator +=(VECTOR_3D<T> const &v)
 template <class T>
 VECTOR_3D<T> VECTOR_3D<T>::operator -(VECTOR_3D<T> const &v)
 {
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
     result.x = x - v.x;
     result.y = y - v.y;
@@ -196,7 +198,7 @@ VECTOR_3D<T> VECTOR_3D<T>::operator %(VECTOR_3D<T> const &v)
     cy = azbx - axbz
     cz = axby - aybx*/
 
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
     result.x = (y * v.z) - (z * v.y);
     result.y = (z * v.x) - (x * v.z);
@@ -212,7 +214,7 @@ VECTOR_3D<T>& VECTOR_3D<T>::operator %=(VECTOR_3D<T> const &v)
     /*cx = aybz - azby
     cy = azbx - axbz
     cz = axby - aybx*/
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
     result.x = (y * v.z) - (z * v.y);
     result.y = (z * v.x) - (x * v.z);
@@ -231,7 +233,7 @@ VECTOR_3D<T> VECTOR_3D<T>::cross(VECTOR_3D<T> const &v)
     cy = azbx - axbz
     cz = axby - aybx*/
 
-    VECTOR_3D result;
+    VECTOR_3D result(0,0,0);
     result.x = (y * v.z) - (z * v.y);
     result.y = (z * v.x) - (x * v.z);
     result.z = (x * v.y) - (y * v.x);
@@ -259,9 +261,9 @@ template <class T>
 bool VECTOR_3D<T>::operator ==(VECTOR_3D const &v)
 {
 
-    if((fabs(x - v.x) < 0.00001) &&
-            (fabs(y - v.y) < 0.00001) &&
-            (fabs(z - v.z) < 0.00001) ) return true;
+    if((fabs(x - v.x) < FLOAT_MIN) &&
+            (fabs(y - v.y) < FLOAT_MIN) &&
+            (fabs(z - v.z) < FLOAT_MIN) ) return true;
     else
         return false;
 
@@ -281,8 +283,9 @@ bool VECTOR_3D<T>::operator !=(VECTOR_3D const &v)
 template <class T>
 VECTOR_3D<T> VECTOR_3D<T>::operator /(float scalar)
 {
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
+    if( fabs(scalar) < FLOAT_MIN ) return *this;
     result.x = x/scalar;
     result.y = y/scalar;
     result.z = z/scalar;
@@ -293,7 +296,7 @@ VECTOR_3D<T> VECTOR_3D<T>::operator /(float scalar)
 template <class T>
 VECTOR_3D<T>& VECTOR_3D<T>::operator /=(float scalar)
 {
-    if( fabs(scalar) < 0.00001 ) return *this;
+    if( fabs(scalar) < FLOAT_MIN ) return *this;
     x = x/scalar;
     y = y/scalar;
     z = z/scalar;
@@ -304,7 +307,7 @@ VECTOR_3D<T>& VECTOR_3D<T>::operator /=(float scalar)
 template <class T>
 VECTOR_3D<T> VECTOR_3D<T>::operator *(float scalar)
 {
-    VECTOR_3D<T> result;
+    VECTOR_3D<T> result(0,0,0);
 
     result.x = x*scalar;
     result.y = y*scalar;
@@ -316,7 +319,7 @@ VECTOR_3D<T> VECTOR_3D<T>::operator *(float scalar)
 template <class T>
 VECTOR_3D<T>& VECTOR_3D<T>::operator *=(float scalar)
 {
-    if( fabs(scalar) < 0.00001 ) return *this;
+    if( fabs(scalar) < FLOAT_MIN ) return *this;
     x = x*scalar;
     y = y*scalar;
     z = z*scalar;

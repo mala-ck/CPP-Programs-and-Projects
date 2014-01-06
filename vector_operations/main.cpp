@@ -2,7 +2,7 @@
 #include "Vector3D.h"
 using namespace std;
 
-/* Program to perform different kinds of 3D vector operations */
+/* Program for 3D vector operations */
 
 
 int main()
@@ -70,6 +70,13 @@ int main()
     a = x;
     a /= 2;
     std::cout<< x << " /= " << 2 << " = " << a << std::endl;
+
+    std::cout << "Vector scaling: " << std::endl;
+    std::cout<< x << " / " << 0 << " = " << x/0 << std::endl;
+    a = x;
+    a /= 0;
+    std::cout<< x << " /= " << 0 << " = " << a << std::endl;
+
     std::cout<< x << " * " << 2 << " = " << x*2 << std::endl;
     a = x;
     a *= 2;
